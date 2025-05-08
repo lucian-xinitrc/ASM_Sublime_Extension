@@ -12,6 +12,6 @@
 
 The plugin requires to be run on **linux** and having a tasm dir in the coding folder
 
-**Dosbox**
+**Dosbox**<br>
 **Terminator**
 
