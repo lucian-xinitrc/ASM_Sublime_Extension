@@ -8,3 +8,10 @@
 ```json
 {"keys" ["ctrl+alt+t"], "command":"compile_with_tasm.py"}
 ```
+## $ Dependencies
+
+The plugin requires to be run on **linux** and having a tasm dir in the coding folder
+
+**Dosbox**
+**Terminator**
+
