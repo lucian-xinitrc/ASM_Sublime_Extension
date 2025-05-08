@@ -1,0 +1,147 @@
+Turbo Assembler	 Version 3.0	    02/08/19 10:41:02	    Page 1
+add2.ASM
+
+
+
+      1	0000			     .model small
+      2
+      3	0000			     .data
+      4
+      5	0000  0A 0D 45 6E 74 65	72+   msg1 db 10,13,"Enter first no.$"
+      6	      20 66 69 72 73 74	20+
+      7	      6E 6F 2E 24
+      8	0012  0A 0D 45 6E 74 65	72+   msg2 db 10,13,"Enter second no.$"
+      9	      20 73 65 63 6F 6E	64+
+     10	      20 6E 6F 2E 24
+     11	0025  0A 0D 41 64 64 69	74+   msg3 db 10,13,"Addition is:$"
+     12	      69 6F 6E 20 69 73	3A+
+     13	      24
+     14
+     15	0034			      .code
+     16
+     17	0000  B8 0000s		       mov ax,@data
+     18	0003  8E D8		       mov ds,ax
+     19
+     20	0005  BA 0000r		       lea dx,msg1
+     21	0008  B4 09		       mov ah,09H
+     22	000A  CD 21		       int 21H
+     23
+     24	000C  B4 01		       mov ah,01H
+     25	000E  CD 21		       int 21H
+     26
+     27	0010  2C 30		       sub al,30H
+     28	0012  3C 09		       cmp al,09H
+     29	0014  76 02		       JBE L1
+     30	0016  2C 07		       sub al,07H
+     31
+     32	0018  B1 04		      L1: mov cl,04H
+     33	001A  D2 C0			  ROL al,cl
+     34	001C  8A D8			  mov bl,al
+     35
+     36	001E  B4 01			  mov ah,01H
+     37	0020  CD 21			  int 21H
+     38
+     39	0022  2C 30			  sub al,30H
+     40	0024  3C 09			  cmp al,09H
+     41	0026  76 02			  JBE L2
+     42	0028  2C 07			  sub al,07H
+     43	002A  02 D8		       L2:ADD bl,al
+     44
+     45	002C  BA 0012r		       lea dx,msg2
+     46	002F  B4 09		       mov ah,09H
+     47	0031  CD 21		       int 21H
+     48
+     49	0033  B4 01		       mov ah,01H
+     50	0035  CD 21		       int 21H
+     51
+     52	0037  2C 30			sub al,30H
+     53	0039  3C 09			cmp al,09H
+     54	003B  76 02			JBE L3
+     55	003D  2C 07			sub al,07H
+     56	003F  B1 04		      L3: mov cl,04H
+     57	0041  D2 C0			  ROL al,cl
+Turbo Assembler	 Version 3.0	    02/08/19 10:41:02	    Page 2
+add2.ASM
+
+
+
+     58	0043  8A F8			  mov bh,al
+     59
+     60	0045  B4 01			  mov ah,01H
+     61	0047  CD 21			  int 21H
+     62
+     63	0049  2C 30			  sub al,30H
+     64	004B  3C 09			  cmp al,09H
+     65	004D  76 02			  JBE L4
+     66	004F  2C 07			  sub al,07H
+     67	0051  02 F8		       L4:ADD bh,al
+     68
+     69	0053  02 DF			  ADD bl,bh
+     70
+     71	0055  BA 0025r			 lea dx,msg3
+     72	0058  B4 09			 mov ah,09H
+     73	005A  CD 21			 int 21H
+     74
+     75	005C  B5 02			 mov ch,02H
+     76	005E  B1 04			 mov cl,04H
+     77
+     78	0060  D2 C3		      L5:ROL bl,cl
+     79	0062  8A FB			 mov bh,bl
+     80
+     81	0064  80 E3 0F			 AND bl,0FH
+     82	0067  80 FB 09			 cmp bl,09H
+     83	006A  76 03			 JBE L6
+     84	006C  80 C3 07			 ADD bl,07H
+     85	006F  80 C3 30		      L6:ADD bl,30H
+     86	0072  8A D3			 mov dl,bl
+     87
+     88	0074  B4 02			 mov ah,02H
+     89	0076  CD 21			 int 21H
+     90
+     91	0078  8A DF			 mov bl,bh
+     92	007A  FE CD			 dec ch
+     93	007C  75 E2			 JNZ L5
+     94
+     95	007E  B4 4C			 mov ah,4ch
+     96	0080  CD 21			 int 21H
+     97					 end
+Turbo Assembler	 Version 3.0	    02/08/19 10:41:02	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/08/19"
+??FILENAME			  Text	 "add2	  "
+??TIME				  Text	 "10:41:02"
+??VERSION			  Number 0300
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 ADD2
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+L1				  Near	 _TEXT:0018
+L2				  Near	 _TEXT:002A
+L3				  Near	 _TEXT:003F
+L4				  Near	 _TEXT:0051
+L5				  Near	 _TEXT:0060
+L6				  Near	 _TEXT:006F
+MSG1				  Byte	 DGROUP:0000
+MSG2				  Byte	 DGROUP:0012
+MSG3				  Byte	 DGROUP:0025
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  _DATA				  16  0034 Word	  Public  DATA
+_TEXT				  16  0082 Word	  Public  CODE
+
