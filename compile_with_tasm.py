@@ -28,7 +28,7 @@ class CompileWithTasmCommand(sublime_plugin.TextCommand):
             dosbox_command = (
                 'dosbox -c "mount C ." '
                 '-c "C:" '
-                '-c "cd tasm_v3" '
+                '-c "cd tasm_dir" '
                 '-c "TASM EXEC.ASM" '
                 '-c "TLINK EXEC.OBJ" '
                 '-c "EXEC.EXE > OUTPUT.TXT" '
