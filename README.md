@@ -6,7 +6,7 @@
 4. Add the following keybinding in: `Preferences -> Key Bindings`
 
 ```json
-{"keys" ["ctrl+alt+t"], "command":"compile_with_tasm.py"}
+{"keys": ["ctrl+alt+t"], "command":"compile_with_tasm.py"}
 ```
 ## $ Dependencies
 
