@@ -21,6 +21,7 @@ class CompileWithTasmCommand(sublime_plugin.TextCommand):
         file_name = os.path.basename(file_path)
         exec_path = os.path.join(file_dir, "tasm_dir", "EXEC.ASM")
         output_txt = os.path.join(file_dir, "tasm_dir", "OUTPUT.TXT")
+        output_lst = os.path.join(file_dir, "tasm_dir", "EXEC.LST")
 
         try:
             shutil.copy(file_path, exec_path)
@@ -29,18 +30,19 @@ class CompileWithTasmCommand(sublime_plugin.TextCommand):
                 'dosbox -c "mount C ." '
                 '-c "C:" '
                 '-c "cd tasm_dir" '
-                '-c "TASM EXEC.ASM" '
-                '-c "TLINK EXEC.OBJ" '
-                '-c "EXEC.EXE > OUTPUT.TXT" '
+                '-c "TASM /zi /l EXEC.ASM" '
+                '-c "TLINK /v /3 EXEC.OBJ" '
+                '-c "EXEC.EXE" '
                 '-c "DEL EXEC.ASM" '
                 '-c "DEL EXEC.OBJ" '
                 '-c "DEL EXEC.EXE" '
-                '-c "exit"'
+                #'-c "exit"'
             )
 
             subprocess.Popen(["terminator", "-e", dosbox_command], cwd=file_dir)
 
             sublime.set_timeout_async(lambda: self.load_output(output_txt), 5000)
+            sublime.set_timeout_async(lambda: self.load_output(output_lst), 5000)
 
         except Exception as e:
             sublime.message_dialog("Error: " + str(e))
